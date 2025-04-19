@@ -17,13 +17,14 @@ Nosso projeto visa implementar uma solução, utilizando semáforos, mutex locks
 
 ![image](https://github.com/user-attachments/assets/1cbf12d4-f318-4507-9e6a-335efe32b9cb)
 
-Esse problema explora o desafio de coordenar múltiplas threads acessando uma área de memória compartilhada, garantindo uma sincronização eficaz e coordenando as threads a fim de prevenir conflitos e manter a integridade de dados. As principais características desse problema são:
+Esse problema explora o desafio de coordenar múltiplas threads acessando uma área de memória compartilhada (geralmente um banco de dados ou um arquivo), garantindo uma sincronização eficaz e coordenando as threads a fim de prevenir conflitos e manter a integridade de dados. Nesse problema, utilizamos threads para representar:
 
-- Algumas threads podem ler e outras podem escrever;
-- Nenhuma thread pode acessar a área compartilhada para leitura ou escrita enquanto a outra thread estiver escrevendo.
+- **Leitores**: só leem um recurso.
+- **Escritores:** modificam esse recurso.
 
-Desejamos evitar que mais de uma thread modifique o recurso compartilhado simultaneamente. 
+Desejamos evitar que mais de uma thread modifique o recurso compartilhado simultaneamente, garantindo consistência e segurança. 
 
 ## Explicação do código
+
 
 ## Instruções para compilação

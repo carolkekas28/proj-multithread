@@ -32,8 +32,6 @@ Para compilar esse projeto, basta no terminal digitar `make` na pasta do projeto
 - Escrita no buffer.
 - Atualização do estado global ASCII.
 
-## Organização do código
-
 
 ## Funcionamento do código
 Para resolver o Problema dos Leitores-Escritores, criamos um modelo de solução que utiliza threads, mutexes e variáveis de condição. Temos um recurso compartilhado entre as threads que é um buffer de texto, que pode ser acessado por qualquer leitor simultaneamente, desde que nenhum escritor esteja ativo. O escritor, por sua vez, precisa de exclusividade total: ele só entra quando não há leitores e escritores ativos.
@@ -74,4 +72,21 @@ pthread_cond_t cond_escritor;
 
 Um sistema de log exibe o estado global do nosso programa, indicando quem está lendo, quem está escrevendo, quem está esperando e o conteúdo atual do buffer.
 
+## Exemplo de saída do código
 
+Durante a execução do nosso código, vemos repetidamente o estado do nosso sistema após cada entrada/saída de um leitor ou escritor, impresso da seguinte maneira: 
+```
+╔═════════════ ESTADO DO SISTEMA ═════════════╗
+║ Escritor ativo        : [E0]                ║
+║ Leitores ativos       : (nenhum)            ║
+║ Buffer                : "Escrito por escritor 0"
+║---------------------------------------------║
+║ Leitores esperando    : L1 L2               ║
+║ Escritores esperando  : E1                  ║
+╚═════════════════════════════════════════════╝
+```
+Quando alguma thread realiza alguma ação, é exibida uma mensagem que indica o que foi feito.
+```
+Escritor 0 escreveu
+Leitor 1 leu: Escrito por escritor 0. 
+```

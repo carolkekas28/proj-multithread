@@ -90,3 +90,13 @@ Quando alguma thread realiza alguma ação, é exibida uma mensagem que indica o
 Escritor 0 escreveu
 Leitor 1 leu: Escrito por escritor 0. 
 ```
+
+## Organização do código
+
+Os arquivos principais do nosso programa são:
+- `sync.h` e `sync.c`: implementam a lógica de sincronização usando `pthread_mutex_t` e `pthread_cond_t`, além do controle do estado global compartilhado. Gerenciam a entrada e a saída de leitores e escritores, assegurando o respeito às regras de exclusão mútua e prioridade.
+- `leitor.c`: contém a função de thread dos leitores, que acessam o buffer compartilhado se não houver escritor ativo. Leitores podem atuar simultaneamente.
+- `escritor.c`: define o comportamento das threads escritoras, que precisam de acesso exclusivo ao buffer. Um escritor só entra quando não há outros leitores e escritores ativos.
+- `logger.c`: responsável por imprimir o estado atual do sistema em formato ASCII, exibindo leitores e escritores que estão ativos ou esperando, além do conteúdo atual do buffer.
+- `main.c`: cria as threads de leitores e escritores, inicializa a sincronização e executa o programa por um período fixo de 15s.
+- `Makefile`: auxilia com a compilação do projeto.

@@ -41,7 +41,8 @@ Onde N e M são respectivamente o número de leitores e escritores, onde obrigat
 Para resolver o Problema dos Leitores-Escritores, criamos um modelo de solução que utiliza threads, mutexes e variáveis de condição. Temos um recurso compartilhado entre as threads que é um buffer de texto, que pode ser acessado por qualquer leitor simultaneamente, desde que nenhum escritor esteja ativo. O escritor, por sua vez, precisa de exclusividade total: ele só entra quando não há leitores e escritores ativos.
 
 ### Estrutura de sincronização 
-```
+
+```c
 typedef struct {
     int leitores_ativos;
     int escritores_ativos;
@@ -56,7 +57,7 @@ typedef struct {
 
 Além disso, também utilizamos:
 
-``` 
+```c
 pthread_mutex_t mutex;
 pthread_cond_t cond_leitor;
 pthread_cond_t cond_escritor;

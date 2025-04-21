@@ -26,12 +26,16 @@ Desejamos evitar que mais de uma thread modifique o recurso compartilhado simult
 
 ## Instruções para compilação
 
-Para compilar esse projeto, basta no terminal digitar `make` na pasta do projeto. Isso irá utilizar o arquivo `Makefile` para gerar um arquivo executável chamado `./leitores_escritores`. Basta digitar o nome do arquivo executável no terminal para que seja visualizada a execução simultânea de múltiplas threads leitoras e escritoras, que alternam em:
+Para compilar esse projeto, basta no terminal digitar `make` na pasta do projeto. Isso irá utilizar o arquivo `Makefile` para gerar um arquivo executável chamado `./leitores_escritores`. Por fim, é necessário digitar no terminal:
+
+```
+./leitores_escritores N M
+```
+Onde N e M são respectivamente o número de leitores e escritores, onde obrigatoriamente deve-se ter N < 10 e M < 3. Com iso, será visualizada a execução simultânea de múltiplas threads leitoras e escritoras, que alternam entre si em:
 
 - Leitura do buffer.
 - Escrita no buffer.
 - Atualização do estado global ASCII.
-
 
 ## Funcionamento do código
 Para resolver o Problema dos Leitores-Escritores, criamos um modelo de solução que utiliza threads, mutexes e variáveis de condição. Temos um recurso compartilhado entre as threads que é um buffer de texto, que pode ser acessado por qualquer leitor simultaneamente, desde que nenhum escritor esteja ativo. O escritor, por sua vez, precisa de exclusividade total: ele só entra quando não há leitores e escritores ativos.

@@ -24,7 +24,17 @@ Esse problema explora o desafio de coordenar múltiplas threads acessando uma á
 
 Desejamos evitar que mais de uma thread modifique o recurso compartilhado simultaneamente, garantindo consistência e segurança. 
 
-## Explicação do código
-
-
 ## Instruções para compilação
+
+Para compilar esse projeto, basta no terminal digitar `make` na pasta do projeto. Isso irá utilizar o arquivo `Makefile` para gerar um arquivo executável chamado `./leitores_escritores`. Basta digitar o nome do arquivo executável no terminal para que seja visualizada a execução simultânea de múltiplas threads leitoras e escritoras, que alternam em:
+
+- Leitura do buffer.
+- Escrita no buffer.
+- Atualização do estado global ASCII.
+
+## Organização do código
+
+
+## Funcionamento do código
+
+

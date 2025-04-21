@@ -31,7 +31,7 @@ Para compilar esse projeto, basta no terminal digitar `make` na pasta do projeto
 ```
 ./leitores_escritores N M
 ```
-Onde N e M são respectivamente o número de leitores e escritores, onde obrigatoriamente deve-se ter N < 10 e M < 3. Com iso, será visualizada a execução simultânea de múltiplas threads leitoras e escritoras, que alternam entre si em:
+Onde N e M são respectivamente o número de leitores e escritores, onde obrigatoriamente deve-se ter N < 10 e M < 3. Com isso, será visualizada a execução simultânea de múltiplas threads leitoras e escritoras, que alternam entre si em:
 
 - Leitura do buffer.
 - Escrita no buffer.

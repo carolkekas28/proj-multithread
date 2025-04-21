@@ -36,5 +36,42 @@ Para compilar esse projeto, basta no terminal digitar `make` na pasta do projeto
 
 
 ## Funcionamento do código
+Para resolver o Problema dos Leitores-Escritores, criamos um modelo de solução que utiliza threads, mutexes e variáveis de condição. Temos um recurso compartilhado entre as threads que é um buffer de texto, que pode ser acessado por qualquer leitor simultaneamente, desde que nenhum escritor esteja ativo. O escritor, por sua vez, precisa de exclusividade total: ele só entra quando não há leitores e escritores ativos.
+
+### Estrutura de sincronização 
+```
+typedef struct {
+    int leitores_ativos;
+    int escritores_ativos;
+    int leitores_esperando;
+    int escritores_esperando;
+    char buffer[MAX_BUFFER];
+} Estado;
+```
+- `buffer` armazena a última mensagem escrita por um escritor.
+- `leitores_ativos` e `escritores_ativos` controlam o número de threads dentro da seção crítica.
+- `leitores_esperando` e `escritores_esperando` armazenam quantos estão aguardando entrada.
+
+Além disso, também utilizamos:
+
+``` 
+pthread_mutex_t mutex;
+pthread_cond_t cond_leitor;
+pthread_cond_t cond_escritor;
+```
+- `mutex` garante exclusão mútua no acesso ao estado compartilhado.
+- `cond_leitor` e `cond_escritor` são utilizadas para controlar o avanço de leitores e escritores conforme as condições do sistema.
+
+### Lógica de controle
+
+- **Leitores**:
+  - Entram se não houver escritores ativos.
+  - Quando o último leitor sai, acorda um escritor, caso haja um aguardando.
+ 
+- **Escritores**:
+  - Só entram se não houver leitores e escritores ativos.
+  - Ao sair, priorizam outro escritor se houver ou liberam todos os leitores.
+
+Um sistema de log exibe o estado global do nosso programa, indicando quem está lendo, quem está escrevendo, quem está esperando e o conteúdo atual do buffer.
 
 
